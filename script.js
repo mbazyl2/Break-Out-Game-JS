@@ -11,14 +11,17 @@ const PADDLE_WIDTH = 100;
 const PADDLE_THICKNESS = 10;
 const PADDLE_DISTANCE_FROM_EDGE = 60;
 
-
+var mouseX;
+var mouseY;
 
 
 function updateMousePosition(evt){
 	var rect = canvas.getBoundingClientRect(); 					// to check
 	var root = document.documentElement;						// to check
-	var mouseX = evt.clientX - rect.left - root.scrollLeft;
-	// var mouseY = evt.clientY - rect.top - root.scrollTop;
+
+	mouseX = evt.clientX - rect.left - root.scrollLeft;
+	mouseY = evt.clientY - rect.top - root.scrollTop;
+
 	paddleX = mouseX - PADDLE_WIDTH/2;
 	console.log('mouse Moved '+mouseX);
 }
@@ -89,7 +92,8 @@ function moveAll() {
 function drawAll() {
 	colorRect(0, 0, canvas.width, canvas.height, 'black');
 	colorCircle(ballX, ballY, 10, 'white');				 
-	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white')
+	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+	colorText(mouseX+","+mouseY, mouseX, mouseY, 'yellow');
 }
 
 function colorCircle(circleCenterX,circleCenterY, radius, fillColor){
@@ -103,4 +107,8 @@ function colorCircle(circleCenterX,circleCenterY, radius, fillColor){
 function colorRect(topLeftX, topLeftY, width, height, drawColor){
 	ctx.fillStyle = drawColor;
 	ctx.fillRect(topLeftX, topLeftY, width, height);
+}
+function colorText(showWords, textX, textY, fillColor){
+	ctx.fillStyle = fillColor;
+	ctx.fillText(showWords, textX,textY);
 }
