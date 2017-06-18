@@ -14,6 +14,14 @@ const PADDLE_DISTANCE_FROM_EDGE = 60;
 var mouseX;
 var mouseY;
 
+const BRICK_W = 100;
+const BRICK_H = 50;
+const BRICK_COUNT = 4;
+
+var brick1 = true;
+var brick2 = true;
+var brick3 = true;
+var brick4 = true;
 
 function updateMousePosition(evt){
 	var rect = canvas.getBoundingClientRect(); 					// to check
@@ -23,7 +31,7 @@ function updateMousePosition(evt){
 	mouseY = evt.clientY - rect.top - root.scrollTop;
 
 	paddleX = mouseX - PADDLE_WIDTH/2;
-	console.log('mouse Moved '+mouseX);
+	// console.log('mouse Moved '+mouseX); // used this for debbuging issues
 }
 
 
@@ -89,11 +97,20 @@ function moveAll() {
 
 }
 
+function drawBricks() {
+	if (brick1) { colorRect(0, 0, BRICK_W, BRICK_H, 'blue'); }
+	if (brick2) { colorRect(BRICK_W + 2, 0, BRICK_W, BRICK_H, 'blue'); }
+	if (brick3) { colorRect(2*(BRICK_W + 2), 0, BRICK_W, BRICK_H, 'blue'); }
+	if (brick4) { colorRect(3*(BRICK_W + 2), 0, BRICK_W, BRICK_H, 'blue'); }
+}
+
 function drawAll() {
 	colorRect(0, 0, canvas.width, canvas.height, 'black');
 	colorCircle(ballX, ballY, 10, 'white');				 
 	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
+	drawBricks();
 	colorText(mouseX+","+mouseY, mouseX, mouseY, 'yellow');
+	
 }
 
 function colorCircle(circleCenterX,circleCenterY, radius, fillColor){
