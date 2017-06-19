@@ -16,12 +16,9 @@ var mouseY;
 
 const BRICK_W = 100;
 const BRICK_H = 50;
-const BRICK_COUNT = 4;
+const BRICK_COUNT = 8;
 
-var brick1 = true;
-var brick2 = true;
-var brick3 = true;
-var brick4 = true;
+var brickGrid = new Array(BRICK_COUNT);
 
 function updateMousePosition(evt){
 	var rect = canvas.getBoundingClientRect(); 					// to check
@@ -34,6 +31,15 @@ function updateMousePosition(evt){
 	// console.log('mouse Moved '+mouseX); // used this for debbuging issues
 }
 
+	function brickReset(){
+		for(var i=0; i<BRICK_COUNT; i++){
+			if(Math.random() < 0.5){
+			brickGrid[i] = true;
+		} else {
+			brickGrid[i] = false;
+		}
+	}
+}
 
 
 window.onload = function() {
@@ -43,6 +49,7 @@ window.onload = function() {
 	setInterval(updateAll, 1000/framesPerSecond);
 
 	canvas.addEventListener('mousemove', updateMousePosition);
+	brickReset();
 }
 
 function updateAll() {
@@ -98,10 +105,11 @@ function moveAll() {
 }
 
 function drawBricks() {
-	if (brick1) { colorRect(0, 0, BRICK_W, BRICK_H, 'blue'); }
-	if (brick2) { colorRect(BRICK_W + 2, 0, BRICK_W, BRICK_H, 'blue'); }
-	if (brick3) { colorRect(2*(BRICK_W + 2), 0, BRICK_W, BRICK_H, 'blue'); }
-	if (brick4) { colorRect(3*(BRICK_W + 2), 0, BRICK_W, BRICK_H, 'blue'); }
+	for(var i=0; i<BRICK_COUNT; i++) {
+		if(brickGrid[i]){
+			colorRect((BRICK_W*i), 0, BRICK_W-2, BRICK_H, 'blue');
+		}
+	}
 }
 
 function drawAll() {
