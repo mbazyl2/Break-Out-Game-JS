@@ -37,9 +37,9 @@ function updateMousePosition(evt){
 			brickGrid[i] = true;
 		} else {
 			brickGrid[i] = false;
-		}
-	}
-}
+		} // end of else ( rand check )
+	}	// end of for each brick
+}	// end of brickReset function
 
 
 window.onload = function() {
@@ -108,9 +108,9 @@ function drawBricks() {
 	for(var i=0; i<BRICK_COUNT; i++) {
 		if(brickGrid[i]){
 			colorRect((BRICK_W*i), 0, BRICK_W-2, BRICK_H, 'blue');
-		}
-	}
-}
+		} // end of is this brick here
+	}	// end of for each brick
+} // end of drawBricks
 
 function drawAll() {
 	colorRect(0, 0, canvas.width, canvas.height, 'black');
