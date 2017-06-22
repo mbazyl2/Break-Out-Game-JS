@@ -17,6 +17,7 @@ var mouseY;
 const BRICK_W = 100;
 const BRICK_H = 50;
 const BRICK_COUNT = 8;
+const BRICK_ROWS = 3;
 const BRICK_GAP = 2;
 
 var brickGrid = new Array(BRICK_COUNT);
@@ -34,11 +35,11 @@ function updateMousePosition(evt){
 
 	function brickReset(){
 		for(var i=0; i<BRICK_COUNT; i++){
-			if(Math.random() < 0.5){
+	//		if(Math.random() < 0.5){
 			brickGrid[i] = true;
-		} else {
+	/*	} else {
 			brickGrid[i] = false;
-		} // end of else ( rand check )
+		} // end of else ( rand check ) */
 	}	// end of for each brick
 }	// end of brickReset function
 
@@ -106,11 +107,13 @@ function moveAll() {
 }
 
 function drawBricks() {
-	for(var i=0; i<BRICK_COUNT; i++) {
-		if(brickGrid[i]){
-			colorRect((BRICK_W*i), 0, BRICK_W-BRICK_GAP, BRICK_H, 'blue');
-		} // end of is this brick here
-	}	// end of for each brick
+	for(var eachRow=0; eachRow<BRICK_ROWS; eachRow++){
+		for(var i=0; i<BRICK_COUNT; i++) {
+			if(brickGrid[i]){
+				colorRect((BRICK_W*i), BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
+			} // end of is this brick here
+		}	// end of for each brick
+	}
 } // end of drawBricks
 
 function drawAll() {
