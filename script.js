@@ -17,6 +17,7 @@ var mouseY;
 const BRICK_W = 100;
 const BRICK_H = 50;
 const BRICK_COUNT = 8;
+const BRICK_GAP = 2;
 
 var brickGrid = new Array(BRICK_COUNT);
 
@@ -107,7 +108,7 @@ function moveAll() {
 function drawBricks() {
 	for(var i=0; i<BRICK_COUNT; i++) {
 		if(brickGrid[i]){
-			colorRect((BRICK_W*i), 0, BRICK_W-2, BRICK_H, 'blue');
+			colorRect((BRICK_W*i), 0, BRICK_W-BRICK_GAP, BRICK_H, 'blue');
 		} // end of is this brick here
 	}	// end of for each brick
 } // end of drawBricks
@@ -117,7 +118,9 @@ function drawAll() {
 	colorCircle(ballX, ballY, 10, 'white');				 
 	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
 	drawBricks();
-	colorText(mouseX+","+mouseY, mouseX, mouseY, 'yellow');
+	var mouseBrickRow = mouseX/BRICK_W; 	// 	variables for debbuging issues
+	var mouseBrickCol = mouseY/BRICK_H;	//
+	colorText(mouseBrickRow+","+mouseBrickCol, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
 	
 }
 
