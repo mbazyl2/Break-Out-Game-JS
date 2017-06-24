@@ -16,11 +16,11 @@ var mouseY;
 
 const BRICK_W = 100;
 const BRICK_H = 50;
-const BRICK_COUNT = 8;
+const BRICK_COLS = 8;
 const BRICK_ROWS = 3;
 const BRICK_GAP = 2;
 
-var brickGrid = new Array(BRICK_COUNT);
+var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
 
 function updateMousePosition(evt){
 	var rect = canvas.getBoundingClientRect(); 					// to check
@@ -34,13 +34,15 @@ function updateMousePosition(evt){
 }
 
 	function brickReset(){
-		for(var i=0; i<BRICK_COUNT; i++){
+		for(var i=0; i<BRICK_COLS * BRICK_ROWS; i++){
 	//		if(Math.random() < 0.5){
 			brickGrid[i] = true;
 	/*	} else {
 			brickGrid[i] = false;
 		} // end of else ( rand check ) */
 	}	// end of for each brick
+
+	brickGrid[2] = false;
 }	// end of brickReset function
 
 
@@ -108,9 +110,12 @@ function moveAll() {
 
 function drawBricks() {
 	for(var eachRow=0; eachRow<BRICK_ROWS; eachRow++){
-		for(var i=0; i<BRICK_COUNT; i++) {
-			if(brickGrid[i]){
-				colorRect((BRICK_W*i), BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
+		for(var eachCol=0; eachCol<BRICK_COLS; eachCol++) {
+
+			var arrayIndex = BRICK_COLS * eachRow + eachCol; // mapping bricks
+
+			if(brickGrid[arrayIndex]){
+				colorRect((BRICK_W*eachCol), BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
 			} // end of is this brick here
 		}	// end of for each brick
 	}
