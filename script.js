@@ -14,10 +14,10 @@ const PADDLE_DISTANCE_FROM_EDGE = 60;
 var mouseX;
 var mouseY;
 
-const BRICK_W = 100;
-const BRICK_H = 50;
-const BRICK_COLS = 8;
-const BRICK_ROWS = 3;
+const BRICK_W = 80;
+const BRICK_H = 20;
+const BRICK_COLS = 10;
+const BRICK_ROWS = 14;
 const BRICK_GAP = 2;
 
 var brickGrid = new Array(BRICK_COLS * BRICK_ROWS);
@@ -35,14 +35,14 @@ function updateMousePosition(evt){
 
 	function brickReset(){
 		for(var i=0; i<BRICK_COLS * BRICK_ROWS; i++){
-	//		if(Math.random() < 0.5){
+			if(Math.random() < 0.5){
 			brickGrid[i] = true;
-	/*	} else {
+		} else {
 			brickGrid[i] = false;
 		} // end of else ( rand check ) */
 	}	// end of for each brick
 
-	brickGrid[2] = false;
+	// brickGrid[2] = false;
 }	// end of brickReset function
 
 
@@ -126,8 +126,8 @@ function drawAll() {
 	colorCircle(ballX, ballY, 10, 'white');				 
 	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
 	drawBricks();
-	var mouseBrickRow = mouseX/BRICK_W; 	// 	variables for debbuging issues
-	var mouseBrickCol = mouseY/BRICK_H;	//
+	var mouseBrickRow = Math.floor(mouseX/BRICK_W); 	// 	variables for debbuging issues
+	var mouseBrickCol = Math.floor(mouseY/BRICK_H);	
 	colorText(mouseBrickRow+","+mouseBrickCol, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
 	
 }
