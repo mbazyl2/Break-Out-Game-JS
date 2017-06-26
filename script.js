@@ -108,11 +108,15 @@ function moveAll() {
 
 }
 
+function rowColToArrayIndex(col, row) {
+	return col + (BRICK_COLS * row);
+}
+
 function drawBricks() {
 	for(var eachRow=0; eachRow<BRICK_ROWS; eachRow++){
 		for(var eachCol=0; eachCol<BRICK_COLS; eachCol++) {
 
-			var arrayIndex = BRICK_COLS * eachRow + eachCol; // mapping bricks
+			var arrayIndex = rowColToArrayIndex(eachCol, eachRow); // mapping bricks
 
 			if(brickGrid[arrayIndex]){
 				colorRect((BRICK_W*eachCol), BRICK_H*eachRow, BRICK_W-BRICK_GAP, BRICK_H-BRICK_GAP, 'blue');
@@ -126,9 +130,10 @@ function drawAll() {
 	colorCircle(ballX, ballY, 10, 'white');				 
 	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
 	drawBricks();
-	var mouseBrickRow = Math.floor(mouseX/BRICK_W); 	// 	variables for debbuging issues
-	var mouseBrickCol = Math.floor(mouseY/BRICK_H);	
-	colorText(mouseBrickRow+","+mouseBrickCol, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
+	var mouseBrickRow = Math.floor(mouseY/BRICK_H); 	// 	variables for debbuging issues
+	var mouseBrickCol = Math.floor(mouseX/BRICK_W);	
+	var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
+	colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
 	
 }
 
