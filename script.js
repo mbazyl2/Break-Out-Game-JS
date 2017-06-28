@@ -82,6 +82,14 @@ function moveAll() {
 		ballSpeedY *= -1;
 	}
 
+	var ballBrickRow = Math.floor(ballY/BRICK_H); 	// 	variables for debbuging issues
+	var ballBrickCol = Math.floor(ballX/BRICK_W);	
+	var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
+	
+	if(brickIndexUnderBall >= 0 && brickIndexUnderBall < BRICK_COLS*BRICK_ROWS){
+		brickGrid[brickIndexUnderBall] = false;
+	}
+
 	var paddleTopEdgeY = canvas.height - PADDLE_DISTANCE_FROM_EDGE;
 	var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
 	var paddleLeftEdgeX = paddleX;
@@ -124,14 +132,14 @@ function drawAll() {
 	colorCircle(ballX, ballY, 10, 'white');				 
 	colorRect(paddleX,canvas.height-PADDLE_DISTANCE_FROM_EDGE, PADDLE_WIDTH, PADDLE_THICKNESS, 'white');
 	drawBricks();
-	var mouseBrickRow = Math.floor(mouseY/BRICK_H); 	// 	variables for debbuging issues
-	var mouseBrickCol = Math.floor(mouseX/BRICK_W);	
-	var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
-	colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
+	// var mouseBrickRow = Math.floor(mouseY/BRICK_H); 	// 	variables for debbuging issues
+	// var mouseBrickCol = Math.floor(mouseX/BRICK_W);	
+	// var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
+	//colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
 	
-	if(brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS*BRICK_ROWS){
-		brickGrid[brickIndexUnderMouse] = false;
-	}
+	// if(brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS*BRICK_ROWS){
+	//		brickGrid[brickIndexUnderMouse] = false;
+	// }
 }
 
 function colorCircle(circleCenterX,circleCenterY, radius, fillColor){
