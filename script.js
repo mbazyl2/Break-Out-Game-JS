@@ -35,14 +35,8 @@ function updateMousePosition(evt){
 
 	function brickReset(){
 		for(var i=0; i<BRICK_COLS * BRICK_ROWS; i++){
-			if(Math.random() < 0.5){
 			brickGrid[i] = true;
-		} else {
-			brickGrid[i] = false;
-		} // end of else ( rand check ) */
 	}	// end of for each brick
-
-	// brickGrid[2] = false;
 }	// end of brickReset function
 
 
@@ -135,6 +129,9 @@ function drawAll() {
 	var brickIndexUnderMouse = rowColToArrayIndex(mouseBrickCol, mouseBrickRow);
 	colorText(mouseBrickCol+","+mouseBrickRow+":"+brickIndexUnderMouse, mouseX, mouseY, 'yellow'); // originaly shows mouseX and mouseY position
 	
+	if(brickIndexUnderMouse >= 0 && brickIndexUnderMouse < BRICK_COLS*BRICK_ROWS){
+		brickGrid[brickIndexUnderMouse] = false;
+	}
 }
 
 function colorCircle(circleCenterX,circleCenterY, radius, fillColor){
