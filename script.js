@@ -62,7 +62,7 @@ function ballReset() {
 	// }
 }
 
-function moveAll() {
+function ballMove() {
 	ballX += ballSpeedX;
 
 	if(ballX > canvas.width) {	// when ball reaches right edge of canvas, it chages movement direction
@@ -81,7 +81,9 @@ function moveAll() {
 	if(ballY < 0)	{				// top
 		ballSpeedY *= -1;
 	}
+}
 
+function ballBrickHandling() {
 	var ballBrickRow = Math.floor(ballY/BRICK_H); 	// 	variables for debbuging issues
 	var ballBrickCol = Math.floor(ballX/BRICK_W);	
 	var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
@@ -90,9 +92,11 @@ function moveAll() {
 		if(brickGrid[brickIndexUnderBall]){
 		brickGrid[brickIndexUnderBall] = false;
 		ballSpeedY *= -1;
-		}
+		} // end of brick found
 	}
+}
 
+function ballPaddleHandling() {
 	var paddleTopEdgeY = canvas.height - PADDLE_DISTANCE_FROM_EDGE;
 	var paddleBottomEdgeY = paddleTopEdgeY + PADDLE_THICKNESS;
 	var paddleLeftEdgeX = paddleX;
@@ -110,6 +114,15 @@ function moveAll() {
 		var ballDistFromPaddleCenterX = ballX - centerOfPaddleX;
 		ballSpeedX = ballDistFromPaddleCenterX * 0.4;
 	}
+
+
+}
+
+function moveAll() {
+	ballMove();
+	ballBrickHandling();
+	ballPaddleHandling();
+
 
 }
 
