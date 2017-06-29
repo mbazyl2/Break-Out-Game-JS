@@ -87,7 +87,10 @@ function moveAll() {
 	var brickIndexUnderBall = rowColToArrayIndex(ballBrickCol, ballBrickRow);
 	
 	if(brickIndexUnderBall >= 0 && ballBrickCol < BRICK_COLS && ballBrickRow >= 0 && ballBrickRow < BRICK_ROWS){
+		if(brickGrid[brickIndexUnderBall]){
 		brickGrid[brickIndexUnderBall] = false;
+		ballSpeedY *= -1;
+		}
 	}
 
 	var paddleTopEdgeY = canvas.height - PADDLE_DISTANCE_FROM_EDGE;
